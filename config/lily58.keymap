@@ -1,0 +1,104 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/ext_power.h>
+
+// danish definitions below
+#define AE	 SEMI	   // Æ
+#define OE	 SQT	   // Ø
+#define AA	 LBKT	   // Å
+#define DK_PIPE	 RA(EQUAL) // |
+#define DK_EXCL  LS(N1)    // !
+#define DK_AT 	 RA(N2)    // @
+#define DK_HASH	 LS(N3)    // #
+#define DK_DLLR	 RA(N4)    // $
+#define DK_PRCNT LS(N5)    // %
+#define DK_AMPS	 LS(N6)	   // &
+#define DK_STAR	 LS(BSLH)  // *
+#define DK_LPAR	 LS(N8)    // (
+#define DK_RPAR	 LS(N9)    // )
+#define DK_LBKT  RA(N8)    // [
+#define DK_RBKT  RA(N9)    // ]
+#define DK_LBRC	 RA(N7)	   // {
+#define DK_RBRC	 RA(N0)	   // }
+#define DK_PLUS	 MINUS     // +
+#define DK_DASH	 FSLH      // -
+#define DK_APOS	 BSLH      // '
+#define DK_EQL	 LS(N0)    // =
+#define DK_QMARK LS(DK_PLUS) // ? 
+#define DK_QUOT	 LS(N2)    // "
+#define DK_COL	 LS(COMMA) // :
+#define DK_SCOL  LS(DOT)   // ;
+#define DK_TILDE RA(BLSH)  // ~ 
+#define DK_LESS  NON_US_BACKSLASH // <
+#define DK_MORE  LS(NON_US_BACKSLASH) // >
+#define DK_BLSH	 RA(NON_US_BACKSLASH) // \
+
+// personal defines
+#define QUIT LA(F4)
+
+/ {
+	keymap {
+		compatible = "zmk,keymap";
+
+		default_layer {
+// ------------------------------------------------------------------------------------------------------------
+// |  ESC  |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |   +   |
+// |  TAB  |  Q  |  W  |  E   |  R   |  T   |                   |  Y   |  U    |  I    |  O   |   P   |   å   |
+// | SHIFT |  A  |  S  |  D   |  F   |  G   |                   |  H   |  J    |  K    |  L   |   æ   |   ø   |
+// |  CTRL |  Z  |  X  |  C   |  V   |  B   |  F13   |  | ENTER |  N   |  M    |  ,    |  .   |   -   |   '   |
+//                     | ALT  | GUI  | LOWER|  SPACE |  | BSPS  | RAISE| BSPC  | GUI   |
+			bindings = <
+&kp ESC   &kp N1 &kp N2 &kp N3   &kp N4   &kp N5                     &kp N6 &kp N7   &kp N8    &kp N9  &kp N0      &kp DK_PLUS
+&kp TAB   &kp Q  &kp W  &kp E    &kp R    &kp T                      &kp Y  &kp U    &kp I     &kp O   &kp P       &kp AA
+&kp LSHFT &kp A  &kp S  &kp D    &kp F    &kp G                      &kp H  &kp J    &kp K     &kp L   &kp AE	   &kp OE
+&kp LCTRL &kp Z  &kp X  &kp C    &kp V    &kp B  &kp F13    &kp RET  &kp N  &kp M    &kp COMMA &kp DOT &kp DK_DASH &kp DK_APOS
+                        &kp LALT &kp LGUI &mo 1  &kp SPACE  &kp BSPC &mo 2  &kp RALT &kp RCTRL
+			>;
+
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+		};
+
+		lower_layer {
+// ------------------------------------------------------------------------------------------------------------
+// | LAF4  |  F1 |  F2 |  F3  |  F4  |  F5  |                   |  F6  |  F7   |  F8   |  F9  |  F10  |  F11  |
+// |       |prev |play | next |      |      |                   |      |  UP   |       |      |PRSCRN |  F12  |
+// |       |LEFT |DOWN |  UP  |RIGHT |      |                   | LEFT | DOWN  | RIGHT |      |       |       |
+// |       |     |     |      |      |      |        |  |       |      |       |       |      |       |       |
+//                     |      |      |      |        |  |       |      |       |       |
+			bindings = <
+&kp QUIT &kp F1	      &kp F2	&kp F3	     &kp F4	&kp F5                       	   &kp F6	&kp F7	  &kp F8      &kp F9    &kp F10    &kp F11
+&trans	 &kp C_PREV   &kp C_PP	&kp C_NEXT   &trans	&bt BT_SEL 0		     	   &trans	&kp UP	  &trans      &trans    &kp PSCRN  &kp F12
+&trans	 &kp LEFT     &kp DOWN	&kp UP	     &kp RIGHT	&bt BT_SEL 1		     	   &kp LEFT	&kp DOWN  &kp RIGHT   &trans    &trans     &trans
+&trans	 &trans	      &trans	&trans	     &trans	&bt BT_SEL 2   &kp F17	 &kp RCTRL &trans	&trans	  &trans      &trans    &trans     &trans
+				&trans	     &trans	&trans         &trans    &kp DEL   &trans	&trans	  &trans
+			>;
+
+			sensor-bindings = <&inc_dec_kp F19 F18>;
+		};
+
+		raise_layer {
+// ------------------------------------------------------------------------------------------------------------
+// |       |     |     |      |   $  |      |                   |      |   &   |   *   |  (   |   )   |  "|"  |
+// |       |     |     |      |      |      |                   |      |  UP   |       |  [   |   ]   |   ´   |
+// |       |     |     |      |      |      |                   | LEFT | DOWN  | RIGHT |  {   |   }   |   ¨   |
+// |       | BT0 | BT1 | BT2  |      |      |BTCLEAR |  |       |      |       |   <   |  >   |   \   |       |
+//                     |      |      |      |        |  |       |      |       |       |
+			bindings = <
+&trans	  &trans	&trans	       &trans	    &kp DK_DLLR  &trans				&trans    &kp DK_AMPS &kp DK_STAR   &kp DK_LPAR  &kp DK_RPAR  &kp DK_PIPE
+&trans    &trans        &trans         &trans       &trans       &trans				&trans    &kp UP      &trans        &kp DK_LBKT  &kp DK_RBKT  &kp EQUAL
+&trans    &trans        &trans         &trans       &trans       &trans				&kp LEFT  &kp DOWN    &kp RIGHT     &kp DK_LBRC  &kp DK_RBRC  &kp RBKT
+&trans	  &bt BT_SEL 0  &bt BT_SEL 1   &bt BT_SEL 2 &trans       &trans  &bt BT_CLR   &trans    &trans    &trans      &kp DK_LESS   &kp DK_MORE  &kp DK_BLSH  &trans
+                         	       &trans       &trans       &trans  &trans       &reset    &trans    &trans      &trans
+			>;
+
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+		};
+	};
+};

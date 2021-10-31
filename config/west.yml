@@ -1,11 +1,11 @@
 manifest:
   remotes:
-    - name: Ivan-Malinovski 
-      url-base: https://github.com/Ivan-Malinovski
+    - name: slicemk
+      url-base: https://github.com/slicemk
   projects:
     - name: zmk
-      remote: Ivan-Malinovski
-      revision: main
+      remote: slicemk
+      revision: v20210923
       import: app/west.yml
   self:
     path: config

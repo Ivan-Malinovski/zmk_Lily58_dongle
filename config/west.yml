@@ -1,11 +1,11 @@
 manifest:
   remotes:
-    - name: Ivan-Malinovski 
-      url-base: https://github.com/Ivan-Malinovski
+    - name: benvallack
+      url-base: https://github.com/benvallack
   projects:
     - name: zmk
-      remote: Ivan-Malinovski
-      revision: main
+      remote: benvallack
+      revision: with-tap-dance
       import: app/west.yml
   self:
     path: config
